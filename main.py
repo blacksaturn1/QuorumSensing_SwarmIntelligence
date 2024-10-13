@@ -45,9 +45,9 @@ if __name__ == '__main__':
                      )
     parser.add_argument('-p', required=False,help='Value of P between 0 and 1')
     args = parser.parse_args()
-    P = float(args.p) if args.p != None else .5
-    R = 10
-    grid = Grid(10, 10, 40, 40, title='Sim of Pulse-Coupled Biological Oscillators', margin=1,framerate=20)
+    P = float(args.p) if args.p != None else 1
+    R = 0
+    grid = Grid(20, 20, 40, 40, title='Sim of Pulse-Coupled Biological Oscillators', margin=1,framerate=20)
     
     grid.set_drawaction('O', draw_Off) # Green
     grid.set_drawaction('X', draw_On) # Red

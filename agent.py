@@ -16,7 +16,7 @@ class Agent:
         self._refractoryTimerCountDown=self.REFRACTORY_TIMER
         self.susceptibleStateTimerCount=0
         self.maxSusceptibleStateTimerCount = 1 / self.SIGNAL_WAVE_PROBABILITY
-        self._groupSize = 0
+        self.groupSize = 0
         self._initiatedSignal = False
         self.emittingSignal = False
         self.upLeftRightDown= [    [0,-1],
@@ -45,17 +45,19 @@ class Agent:
                     self.emittingSignal = True
                     self._state = Agent.RefractoryState
                     self._refractoryTimerCountDown = self.REFRACTORY_TIMER
-                    self._groupSize = self._groupSize + 1
+                    self.groupSize = self.groupSize + 1
                     self.susceptibleStateTimerCount = 0
                 elif not self._initiatedSignal and random.random() < self.SIGNAL_WAVE_PROBABILITY:
                     self.emittingSignal = True
                     self._state = Agent.RefractoryState
                     self._refractoryTimerCountDown = self.REFRACTORY_TIMER
-                    self._groupSize = self._groupSize + 1
+                    self.groupSize = self.groupSize + 1
                     self._initiatedSignal = True
                     self.susceptibleStateTimerCount=0
+                
                 if self.susceptibleStateTimerCount >= self.maxSusceptibleStateTimerCount:
                     self.IsDone = True
+                    print("Size:",self.groupSize)
             else:
                 self.emittingSignal = False
                 self._refractoryTimerCountDown = self._refractoryTimerCountDown - 1

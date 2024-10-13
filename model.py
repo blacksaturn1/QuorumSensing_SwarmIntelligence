@@ -15,12 +15,9 @@ class Model:
                               ]
         self.P=probability
         self.LEN = self.__height * self.__width
-        self.REFRACTORY_TIMER = 10
+        self.REFRACTORY_TIMER = refractoryTimer
         self.states = [Agent(self.__width,self.__height,index,self.P,self.REFRACTORY_TIMER,self) for index in range(self.LEN)]
-        #self.c=[random.random()*self.T for x in range(self.T)]
-        a=1
-     
-     
+      
     def setup(self):
         for y in range(self.__height):        
             for x in range(self.__width):
@@ -49,27 +46,17 @@ class Model:
         
     def run_sim(self):
         BLACK = (0, 0, 0)
-
-        # if self.sim_runs==self.T:
-        #     return
   
         for y in range(self.__height):        
             for x in range(self.__width):
                 index = y*self.__height+x
-                # self.c[index]=self.c[index]+1
                 agent = self.states[index]
                 agent.step()
                 if agent.emittingSignal:
                     self.grid[x,y]="X"
                 else:
                     self.grid[x,y]="O"
-                
-
         self.sim_runs+=1
-
         print("Simulation:",self.sim_runs)
 
-        # if self.sim_runs==self.T:
-        #     self.printStats()
-    
-    
+       
